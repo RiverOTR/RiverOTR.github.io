@@ -2,13 +2,19 @@
 <html lang="en">
 <head>
     <!--meta charset="UTF-8" /-->
-    <title>W OTR</title>
+    <title>RiverOTR.ca</title>
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <!--meta name="description" content="" /-->
     <!--link rel="icon" href="favicon.png"-->
 </head>
 <body>
-    <h1>Word On The River</h1>
-    This is index.html. If you are seeing this, README.md is not being used.
+    <script>
+    if (window.location.pathname === '/wotr') {
+        window.location.href = '/word_on_the_river.html';
+    }
+    </script>
+    <h1>RiverOTR.ca</h1>
+    This is the home page for RiverOTR.ca. You're probably looking for
+    <a href="/word_on_the_river.html">Word On The River</a>.
 </body>
 </html>
