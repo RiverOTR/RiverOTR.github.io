@@ -1,20 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!--meta charset="UTF-8" /-->
-    <title>RiverOTR.ca</title>
+    <meta charset="UTF-8" >
+    <title>RiverOTR|Homepage</title>
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <!--meta name="description" content="" /-->
-    <!--link rel="icon" href="favicon.png"-->
+    <link rel="icon" type="image/x-icon" href="favicon.png">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <script>
-    if (window.location.pathname === '/wotr') {
+    const wotr_paths = new Set(['/wotr','/wordontheriver','/WordOnTheRiver']);
+    if (wotr_paths.has(window.location.pathname)) {
         window.location.href = '/word_on_the_river.html';
     }
     </script>
-    <h1>RiverOTR.ca</h1>
+    <header>
+        <h1>RiverOTR</h1>
+    </header>
+    <nav>
+        <a class="active" href="#RiverOTR">Home</a>
+        <a href="/word_on_the_river">WOTR</a>
+    </nav>
+    <main>
     This is the home page for RiverOTR.ca. You're probably looking for
     <a href="/word_on_the_river.html">Word On The River</a>.
+    </main>
+    <footer>
+        <p>Contact: <a href="mailto:mr.rivertimmothyotter@gmail.com">mr.rivertimmothyotter@gmail.com</a></p>
+        <p>&copy; 2026 Joseph Medernach. All rights reserved.</p>
+        <p><a href="https://www.riverotr.ca">← Back to riverotr.ca</a></p>
+    </footer>
 </body>
 </html>
