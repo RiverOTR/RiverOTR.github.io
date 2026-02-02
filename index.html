@@ -1,34 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" >
-    <title>RiverOTR|Homepage</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <link rel="icon" type="image/x-icon" href="favicon.png">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" >
+  <title>RiverOTR|Homepage</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="icon" type="image/x-icon" href="favicon.png">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      margin-top: 40px;
+      margin-bottom: 40px;
+      padding: 0 20px 60px;
+    }
+
+    section {
+      text-align: center;
+      margin-bottom: 60px;
+      padding: 30px;
+      background: white;
+      border-radius: 2px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    section h2 {
+      font-size: 1.8em;
+      margin-bottom: 20px;
+      color: #4a7c7e;
+      font-weight: normal;
+    }
+    section p {
+      font-size: 1.05em;
+      color: #555;
+    }
+  </style>
 </head>
 <body>
-    <script>
-    const wotr_paths = new Set(['/wotr','/wordontheriver','/WordOnTheRiver']);
-    if (wotr_paths.has(window.location.pathname)) {
-        window.location.href = '/word_on_the_river.html';
-    }
-    </script>
-    <header>
-        <h1>RiverOTR</h1>
-    </header>
-    <nav>
-        <a class="active" href="#RiverOTR">Home</a>
-        <a href="/word_on_the_river">WOTR</a>
-    </nav>
-    <main>
-    This is the home page for RiverOTR.ca. You're probably looking for
-    <a href="/word_on_the_river.html">Word On The River</a>.
-    </main>
-    <footer>
-        <p>Contact: <a href="mailto:mr.rivertimmothyotter@gmail.com">mr.rivertimmothyotter@gmail.com</a></p>
-        <p>&copy; 2026 Joseph Medernach. All rights reserved.</p>
-        <p><a href="https://www.riverotr.ca">← Back to riverotr.ca</a></p>
-    </footer>
+  <header>
+    <h1>RiverOTR</h1>
+  </header>
+  <nav>
+    <a class="active" href="#RiverOTR">Home</a>
+    <a href="/word_on_the_river">WOTR</a>
+    <a href="/contact.html">Contact</a>
+  </nav>
+  <main>
+    <div class="container">
+      <section id="aboutme">
+        <h2>About Me</h2>
+        <p>
+          Hey! I'm Joe, an undergrad student at the University of Saskatchewan.
+          I'm about to finish my B.Sc majoring in Computer Science, and I come
+          back in the fall to finish my Certificate in Sustainability. I love
+          technology, people, and the environment. Find out where you can
+          reach/follow me on the <a href="/contact.html">contacts</a> page.
+        </p>
+      </section>
+      <section id="projects">
+        <h2>Projects</h2>
+        <ul style="list-style-type:none;">
+          <li>
+            <em>Twelve Weeks Project</em>: Starting on January 17th, every Saturday for twelve weeks, I will be posting about various concepts and topics on sustainability. The purpose of this project is to inform my colleagues and acquaintances in computer science about the various topics relating to sustainability. Check it out on <a href="/word_on_the_river.html">Word On The River</a>.
+          </li>
+          <li>
+            <em>Second Life Threads</em>: A capstone project for the Certificate in Sustainability, Second Life Threads is our six-person team's Sustainability in Action project with the goal of reducing textile waste. Check back later in the month to find our Instagram!
+          </li>
+        </ul>
+      </section>
+    </div>
+  </main>
+  <footer>
+    <p>Contact: <a href="mailto:mr.rivertimmothyotter@gmail.com">mr.rivertimmothyotter@gmail.com</a></p>
+    <p>&copy; 2026 Joseph Medernach. All rights reserved.</p>
+    <p><a href="https://www.riverotr.ca">← Back to riverotr.ca</a></p>
+  </footer>
 </body>
 </html>
