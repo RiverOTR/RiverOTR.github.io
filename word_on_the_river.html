@@ -8,11 +8,100 @@
   <link rel="icon" type="image/x-icon" href="favicon.png">
   <style>
     .container {
-      max-width: 800px;
+      max-width: 1200px;
       margin: 0 auto;
       margin-top: 40px;
       margin-bottom: 40px;
       padding: 0 20px 60px;
+      display: flex;
+      gap: 40px;
+      align-items: flex-start;
+    }
+
+    .toc-sidebar {
+      position: sticky;
+      top: 20px;
+      width: 250px;
+      background: white;
+      border-radius: 2px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      flex-shrink: 0;
+    }
+
+    .toc-header {
+      padding: 25px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+      user-select: none;
+    }
+
+    .toc-header:hover {
+      background-color: #f9f9f9;
+    }
+
+    .toc-sidebar h3 {
+      font-size: 1.2em;
+      color: #4a7c7e;
+      margin-bottom: 0;
+      font-weight: normal;
+      display: inline-block;
+    }
+
+    .toc-expand-icon {
+      float: right;
+      font-size: 1.2em;
+      color: #4a7c7e;
+      transition: transform 0.3s;
+    }
+
+    .toc-sidebar.expanded .toc-expand-icon {
+      transform: rotate(180deg);
+    }
+
+    .toc-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+      padding: 0 25px;
+    }
+
+    .toc-sidebar.expanded .toc-content {
+      max-height: 2000px;
+      transition: max-height 0.5s ease-in;
+      padding: 0 25px 25px 25px;
+    }
+
+    .toc-sidebar ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .toc-sidebar li {
+      margin-bottom: 12px;
+    }
+
+    .toc-sidebar a {
+      color: #555;
+      text-decoration: none;
+      font-size: 0.95em;
+      display: block;
+      padding: 5px 0;
+      transition: color 0.2s;
+    }
+
+    .toc-sidebar a:hover {
+      color: #4a7c7e;
+    }
+
+    .toc-sidebar a.active {
+      color: #4a7c7e;
+      font-weight: bold;
+    }
+
+    .content-area {
+      flex: 1;
+      min-width: 0;
     }
 
     section {
@@ -37,36 +126,100 @@
     article {
       background: white;
       margin-bottom: 40px;
-      padding: 40px;
       border-radius: 2px;
       box-shadow: 0 1px 3px rgba(0,0,0,0.1);
     }
     article header {
       background: none;
-      padding: 0 0 20px 0;
-      margin-bottom: 25px;
-      border-bottom: 1px solid #e0e0e0;
+      padding: 25px 30px;
+      margin-bottom: 0;
+      border-bottom: none;
       text-align: left;
       color: #333;
+      cursor: pointer;
+      transition: background-color 0.2s;
+      user-select: none;
+    }
+    article header:hover {
+      background-color: #f9f9f9;
     }
     article h2 {
       font-size: 2em;
       color: #2c5557;
       font-weight: normal;
+      display: inline-block;
     }
-    article p {
-      margin-bottom: 1.05em;
-      text-align: justify;
+    
+    .expand-icon {
+      float: right;
+      font-size: 1.2em;
+      color: #4a7c7e;
+      transition: transform 0.3s;
     }
-    article p:last-child {
-      margin-bottom: 0;
+
+    article.expanded .expand-icon {
+      transform: rotate(180deg);
     }
 
     .date {
       font-size: 0.9em;
       color: #777;
       font-style: italic;
-      margin-bottom: 12px
+      margin-bottom: 12px;
+    }
+
+    .article-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+      padding: 0 30px;
+    }
+
+    article.expanded .article-content {
+      max-height: 5000px;
+      transition: max-height 0.5s ease-in;
+      padding: 0 30px 30px 30px;
+    }
+
+    .article-content p {
+      margin-bottom: 1.05em;
+      text-align: justify;
+    }
+    .article-content p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Mobile styles */
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .toc-sidebar {
+        position: static;
+        width: 100%;
+      }
+
+      .content-area {
+        width: 100%;
+      }
+
+      article header {
+        padding: 20px;
+      }
+
+      .article-content {
+        padding: 0 20px;
+      }
+
+      article.expanded .article-content {
+        padding: 0 20px 20px 20px;
+      }
+
+      article h2 {
+        font-size: 1.3em;
+      }
     }
   </style>
 </head>
@@ -82,98 +235,60 @@
   </nav>
   <main>
     <div class="container">
-      <section class="intro">
-        <h2>Twelve Weeks Project</h2>
-        <p>Starting on January 17th, every Saturday for twelve weeks, I will be posting about various concepts and topics on sustainability. The purpose of this project is to inform my colleagues and acquaintances in computer science about the various topics relating to sustainability.</p>
-      </section>
-      <article id="week-1">
-        <header>
-          <div class="date">Saturday, January 17, 2026</div>
-          <h2>What is Sustainability?</h2>
-        </header>
-        <p>
-        We are at the beginning of our twelve-week journey, and we may all come into this endeavour from
-        different backgrounds and in different contexts. Over the last two years I have learned about many
-        concepts and ideas in sustainability, which greatly changes how I may interpret future topics compared
-        to others. So, I think that it would be wise to use this first week to look at the question: what is
-        sustainability?
-        </p>
-        <p>
-        While some concepts and ideas are common in definitions of sustainability in certain groups,
-        at a much broader scale the definition of sustainability is still an open discussion.
-        I have now been asked in three classes to define what sustainability means to me.
-        One common definition of sustainability is “meeting the needs of the present without compromising
-        the ability of future generations to meet their own needs.”
-        This is from the 1987 <a href="http://www.un-documents.net/our-common-future.pdf">United Nations Bruntland Commission</a>.
-        This definition recognizes the need for development in the present day while highlighting the need to consider future repercussions. Now however, I would like to introduce two supporting concepts.
-        </p>
-        <p>
-        The first is the concept of the <a href="https://populationeducation.org/what-are-the-three-es-of-sustainability">three E's of sustainability</a>. These are environment, economy, and equity. The three E’s framework of sustainability asserts that true sustainability must be in all three senses.
-        </p>
-        <p>
-        The second concept is the idea of <a href="https://en.wikipedia.org/wiki/Weak_and_strong_sustainability">strong and weak sustainability</a>. This idea comes from the field of environmental economics. In short, strong sustainability is the idea that there is both natural and artificial capital and the two are <strong>not</strong> interchangeable, while in weak sustainability, natural and artificial capital <strong>are</strong> interchangeable so long as the total amount of capital is maintained. Weak sustainability is deemed as such because it assumes that various kinds of capital can be given comparable value assignments.
-        </p>
-        <p>
-        Let’s revisit the Bruntland definition of sustainability now that we have two new concepts. There is a possible issue with the definition in that it doesn’t expressly convey the environmental component of sustainability and leaves room for weak sustainability to suffice. In their 1996 article <a href="https://doi.org/10.2307/2269583"><i>Environmental Sustainability: Universal and Non-Negotiable</i></a>, Robert Goodland and Herman Daly introduce the three E’s concept and propose defining sustainability in terms of the input/output rule. Essentially, development without producing and consuming faster than the environment’s absorptive and regenerative capacities.
-        </p>
-        <p>
-        There are many more definitions of sustainability. I encourage you to look for ones that emphasize different scales of community and different aspects of the three E’s, and compare them. Maybe even come up with your own definition. But now that we have a basis for what sustainability is, we can venture further into its topics.
-        </p>
-        <p>
-        Thank you for reading and thank you for joining me on this journey.<br>
-        <br>
-        - Joseph
-        </p>
-      </article>
-      <article id="week-2">
-        <header>
-          <div class="date">Saturday, January 24, 2026</div>
-          <h2>Water Security</h2>
-        </header>
-        <p>
-        This is a bit of a shorter post, but I want to talk about <a href="https://en.wikipedia.org/wiki/Water_security">water security</a> this week. UN-Water defines water security as “The capacity of a population to safeguard sustainable access to adequate quantities of acceptable quality water for sustaining livelihoods, human well-being, and socio-economic development, for ensuring protection against water-borne pollution and water-related disasters, and for preserving ecosystems in a climate of peace and political stability” (Working definition, 2013). There can be many threats to water security: political and economic tensions, along with a changing climate, and water demands for areas of high population density and for economic activities can pose challenges to water availability, with additional issue that some industrial uses of water can raise concerns about water quality. As an activity, I would invite everyone to consider their own water security.
-        </p>
-        <p>
-        If you want to look at a case study, I would recommend reading about the <a href="https://en.wikipedia.org/wiki/Cape_Town_water_crisis">Cape Town water crisis</a>. The city of Cape Town avoided running out of water, but some of the responses they implemented have been criticized for various reasons. Another case you may want to look at is that of <a href="http://www.saveourwater.ca/">Save Our Water</a> in Elora, Ontario.
-        </p>
-        <p>
-        Finally, I want to highlight some YouTube videos that can help shed light on current water security issues, especially in North America:<br>
-        More Perfect Union: <a href="https://www.youtube.com/watch?v=RfzwLtWkVjg">Could Texas Run Out Of Water? Wall Street Is Betting Big On It.</a><br>
-        More Perfect Union: <a href="https://www.youtube.com/watch?v=3wxeqpxg-aQ">What Poland Spring Doesn’t Want You to Know</a><br>
-        Hank Green: <a href="https://www.youtube.com/watch?v=H_c6MWk7PQc&pp=2AbSCQ%3D%3D">Why is Everyone So Wrong About AI Water Use??</a><br>
-        </p>
-        <p>
-        See you next week.<br>
-        <br>
-        - Joseph
-        </p>
-      </article>
-      <article id="week-3">
-        <div class="date">Saturday, January 31, 2026</div>
-        <header>
-          <h2>Planetary Boundaries Framework</h2>
-        </header>
-        <p>
-        Welcome back. Last week I wrote about the topic of water security, but I felt that the post was not as high quality as I wanted it to be. In the first week I wrote about defining sustainability to give everyone a common starting ground for my future posts, but I realized after last week, that there are more frameworks/concepts/ideas that I want to introduce so that I have a broader vocabulary to use when I talk about things like water security. Since I have much less time to do research for this post, I will introduce the planetary boundaries framework into our toolkit, and likely talk about wicked problems next week.
-        </p>
-        <p>
-        The <a href="https://en.wikipedia.org/wiki/Planetary_boundaries">planetary boundaries framework</a> was authored in 2009 by a team of Earth system and environmental scientists led by Johan Rockström and Will Steffen. The framework describes limits to various human effects on the planet, past which, the planet’s ability to self regulate would be uncertain. The framework does this through defining nine boundaries, which are: climate change, biosphere integrity, land-system change, freshwater change, biogeochemical flows, ocean acidification, atmospheric aerosol loading, stratospheric ozone depletion, and novel entities. This last boundary is mostly to do with introduction of chemical pollutants into the environment, which are too new for their effect on the planet to be well known or understood. Some boundaries are broken into two sub-categories, such as climate change which considers CO2 concentration and radiative forcing, and biosphere integrity which considers both functional and genetic diversity. The framework is usually depicted as a radial figure, where each boundary is a “slice of the pie”, and has a ring or central circle representing the “safe” boundary, beyond this each category extends into the area of uncertainty (in the planet’s ability to self-regulate) or even further, beyond the area of uncertainty. Some figures show greyed-out categories, indicating that there is not enough research to quantify these boundaries.
-        </p>
-        <p>
-        This framework is useful in  visualizing the environmental, broad-scale, challenges of sustainability, but more recent adaptations use a doughnut model with the social challenges of sustainability inside the doughnut, and the environmental challenges outside the doughnut. Being that this is not part of the framework currently, its usage in international policy making has been hampered in fears that it will place undue hardship on developing nations.
-        </p>
-        <p>
-        Next week we’ll talk about wicked problems.<br>
-        <br>
-        - Joseph
-        </p>
-      </article>
-      <!--article id="week-4">
-        <div class="date">Saturday, January 31, 2026</div>
-        <header>
-          <h2></h2>
-        </header>
-      </article-->
+      <aside class="toc-sidebar">
+        <div class="toc-header" onclick="toggleTOC()">
+          <h3>Table of Contents</h3>
+          <span class="toc-expand-icon">▼</span>
+        </div>
+        <div class="toc-content">
+          <ul id="toc-list">
+            <li><a href="#intro" data-week="intro">Twelve Weeks Project</a></li>
+            <li><a href="#week-1" data-week="week-1">Week 1: What is Sustainability?</a></li>
+            <li><a href="#week-2" data-week="week-2">Week 2: Water Security</a></li>
+            <li><a href="#week-3" data-week="week-3">Week 3: Planetary Boundaries Framework</a></li>
+          </ul>
+        </div>
+      </aside>
+
+      <div class="content-area">
+        <section class="intro" id="intro">
+          <h2>Twelve Weeks Project</h2>
+          <p>Starting on January 17th, every Saturday for twelve weeks, I will be posting about various concepts and topics on sustainability. The purpose of this project is to inform my colleagues and acquaintances in computer science about the various topics relating to sustainability.</p>
+        </section>
+
+        <article id="week-1" class="expandable">
+          <header onclick="toggleArticle('week-1')">
+            <div class="date">Saturday, January 17, 2026</div>
+            <h2>What is Sustainability?</h2>
+            <span class="expand-icon">▼</span>
+          </header>
+          <div class="article-content">
+            <!-- ADD YOUR ARTICLE CONTENT HERE -->
+          </div>
+        </article>
+
+        <article id="week-2" class="expandable">
+          <header onclick="toggleArticle('week-2')">
+            <div class="date">Saturday, January 24, 2026</div>
+            <h2>Water Security</h2>
+            <span class="expand-icon">▼</span>
+          </header>
+          <div class="article-content">
+            <!-- ADD YOUR ARTICLE CONTENT HERE -->
+          </div>
+        </article>
+
+        <article id="week-3" class="expandable">
+          <header onclick="toggleArticle('week-3')">
+            <div class="date">Saturday, January 31, 2026</div>
+            <h2>Planetary Boundaries Framework</h2>
+            <span class="expand-icon">▼</span>
+          </header>
+          <div class="article-content">
+            <!-- ADD YOUR ARTICLE CONTENT HERE -->
+          </div>
+        </article>
+      </div>
     </div>
   </main>
   <footer>
@@ -181,5 +296,53 @@
     <p>&copy; 2026 Joseph Medernach. All rights reserved.</p>
     <p><a href="https://www.riverotr.ca">← Back to riverotr.ca</a></p>
   </footer>
+
+  <script>
+    function toggleTOC() {
+      const toc = document.querySelector('.toc-sidebar');
+      toc.classList.toggle('expanded');
+    }
+
+    function toggleArticle(id) {
+      const article = document.getElementById(id);
+      article.classList.toggle('expanded');
+    }
+
+    document.querySelectorAll('.toc-sidebar a').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('data-week');
+        const targetElement = document.getElementById(targetId);
+        
+        if (targetElement && targetElement.classList.contains('expandable')) {
+          if (!targetElement.classList.contains('expanded')) {
+            targetElement.classList.add('expanded');
+          }
+        }
+        
+        if (targetElement) {
+          targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        
+        document.querySelectorAll('.toc-sidebar a').forEach(a => a.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+
+    window.addEventListener('load', function() {
+      if (window.location.hash) {
+        const id = window.location.hash.substring(1);
+        const element = document.getElementById(id);
+        if (element) {
+          if (element.classList.contains('expandable')) {
+            element.classList.add('expanded');
+          }
+          setTimeout(() => {
+            element.scrollIntoView({ behavior: 'smooth' });
+          }, 100);
+        }
+      }
+    });
+  </script>
 </body>
 </html>
