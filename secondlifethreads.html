@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Second Life Threads</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/x-icon" href="slt_pfp.jpg">
+  <style>
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      margin-top: 40px;
+      margin-bottom: 40px;
+      padding: 0 20px 60px;
+      display: flex;
+      gap: 40px;
+      align-items: flex-start;
+    }
+
+    .toc-sidebar {
+      position: sticky;
+      top: 20px;
+      width: 250px;
+      background: white;
+      border-radius: 2px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      flex-shrink: 0;
+    }
+
+    .toc-header {
+      padding: 25px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+      user-select: none;
+    }
+
+    .toc-header:hover {
+      background-color: #f9f9f9;
+    }
+
+    .toc-sidebar h3 {
+      font-size: 1.2em;
+      color: #4a7c7e;
+      margin-bottom: 0;
+      font-weight: normal;
+      display: inline-block;
+    }
+
+    .toc-expand-icon {
+      float: right;
+      font-size: 1.2em;
+      color: #4a7c7e;
+      transition: transform 0.3s;
+    }
+
+    .toc-sidebar.expanded .toc-expand-icon {
+      transform: rotate(180deg);
+    }
+
+    .toc-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+      padding: 0 25px;
+    }
+
+    .toc-sidebar.expanded .toc-content {
+      max-height: 2000px;
+      transition: max-height 0.5s ease-in;
+      padding: 0 25px 25px 25px;
+    }
+
+    .toc-sidebar ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .toc-sidebar li {
+      margin-bottom: 12px;
+    }
+
+    .toc-sidebar a {
+      color: #555;
+      text-decoration: none;
+      font-size: 0.95em;
+      display: block;
+      padding: 5px 0;
+      transition: color 0.2s;
+    }
+
+    .toc-sidebar a:hover {
+      color: #4a7c7e;
+    }
+
+    .toc-sidebar a.active {
+      color: #4a7c7e;
+      font-weight: bold;
+    }
+
+    .content-area {
+      flex: 1;
+      min-width: 0;
+    }
+
+    section {
+      text-align: center;
+      margin-bottom: 60px;
+      padding: 30px;
+      background: white;
+      border-radius: 2px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    section h2 {
+      font-size: 1.8em;
+      margin-bottom: 20px;
+      color: #4a7c7e;
+      font-weight: normal;
+    }
+    section p {
+      font-size: 1.05em;
+      color: #555;
+    }
+
+    article {
+      background: white;
+      margin-bottom: 40px;
+      border-radius: 2px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    article header {
+      background: none;
+      padding: 25px 30px;
+      margin-bottom: 0;
+      border-bottom: none;
+      text-align: left;
+      color: #333;
+      cursor: pointer;
+      transition: background-color 0.2s;
+      user-select: none;
+    }
+    article header:hover {
+      background-color: #f9f9f9;
+    }
+    article h2 {
+      font-size: 2em;
+      color: #2c5557;
+      font-weight: normal;
+      display: inline-block;
+    }
+    
+    .expand-icon {
+      float: right;
+      font-size: 1.2em;
+      color: #4a7c7e;
+      transition: transform 0.3s;
+    }
+
+    article.expanded .expand-icon {
+      transform: rotate(180deg);
+    }
+
+    .article-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+      padding: 0 30px;
+    }
+
+    article.expanded .article-content {
+      max-height: 5000px;
+      transition: max-height 0.5s ease-in;
+      padding: 0 30px 30px 30px;
+    }
+
+    .article-content p {
+      margin-bottom: 1.05em;
+      text-align: justify;
+    }
+    .article-content p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Mobile styles */
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .toc-sidebar {
+        position: static;
+        width: 100%;
+      }
+
+      .content-area {
+        width: 100%;
+      }
+
+      article header {
+        padding: 20px;
+      }
+
+      .article-content {
+        padding: 0 20px;
+      }
+
+      article.expanded .article-content {
+        padding: 0 20px 20px 20px;
+      }
+
+      article h2 {
+        font-size: 1.3em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="header-bg"></div>
+  <header>
+    <h1>Second Life Threads</h1>
+  </header>
+  <nav>
+    <a href="/index.html">Home</a>
+    <a href="/word_on_the_river.html">WOTR</a>
+    <a href="/socials.html">Socials</a>
+    <a class="active" href="/secondlifethreads.html">SLT</a>
+  </nav>
+  <main>
+    <div class="container">
+      <aside class="toc-sidebar">
+        <div class="toc-header" onclick="toggleTOC()">
+          <h3>Table of Contents</h3>
+          <span class="toc-expand-icon">▼</span>
+        </div>
+        <div class="toc-content">
+          <ul id="toc-list">
+            <li><a href="#intro" data-week="intro">About the Project</a></li>
+            <li><a href="#res-1" data-week="res-1">Toque Pattern</a></li>
+            <li><a href="#res-2" data-week="res-2">Mittens Pattern</a></li>
+          </ul>
+        </div>
+      </aside>
+
+      <div class="content-area">
+        <section class="intro" id="intro">
+          <h2>About This Project</h2>
+          <p>
+          Turning around textiles for people and the planet. Our mission is to
+          reduce textile waste through local action and online education and
+          awareness.
+          </p>
+        </section>
+
+        <article id="res-1" class="expandable">
+          <header onclick="toggleArticle('res-1')">
+            <h2>Toque Pattern</h2>
+            <span class="expand-icon">▼</span>
+          </header>
+          <div class="article-content">
+            <p>
+            <!-- TODO: Put in useage instructions for toque pattern -->
+            </p>
+            <iframe src="/toque_cutting_pattern.pdf" title="Toque Cutting Pattern PDF" width="100%" height="600pt"></iframe>
+            <!-- TODO: Put download link for pattern pdf -->
+          </div>
+        </article>
+
+        <article id="res-2" class="expandable">
+          <header onclick="toggleArticle('res-2')">
+            <h2>Mittens Pattern</h2>
+            <span class="expand-icon">▼</span>
+          </header>
+          <div class="article-content">
+            <p>
+            <!-- TODO: Put in useage instructions for mittens pattern -->
+            <!-- TODO: Display image of pattern -->
+            <!-- TODO: Put download link for pattern pdf -->
+            </p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </main>
+  <footer>
+    <p>Contact: <a href="mailto:mr.rivertimmothyotter@gmail.com">mr.rivertimmothyotter@gmail.com</a></p>
+    <p>&copy; 2026 Joseph Medernach. All rights reserved.</p>
+    <p><a href="https://www.riverotr.ca">← Back to riverotr.ca</a></p>
+  </footer>
+
+  <script>
+    function toggleTOC() {
+      const toc = document.querySelector('.toc-sidebar');
+      toc.classList.toggle('expanded');
+    }
+
+    function toggleArticle(id) {
+      const article = document.getElementById(id);
+      article.classList.toggle('expanded');
+    }
+
+    document.querySelectorAll('.toc-sidebar a').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('data-week');
+        const targetElement = document.getElementById(targetId);
+        
+        if (targetElement && targetElement.classList.contains('expandable')) {
+          if (!targetElement.classList.contains('expanded')) {
+            targetElement.classList.add('expanded');
+          }
+        }
+        
+        if (targetElement) {
+          targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        
+        document.querySelectorAll('.toc-sidebar a').forEach(a => a.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+
+    window.addEventListener('load', function() {
+      if (window.location.hash) {
+        const id = window.location.hash.substring(1);
+        const element = document.getElementById(id);
+        if (element) {
+          if (element.classList.contains('expandable')) {
+            element.classList.add('expanded');
+          }
+          setTimeout(() => {
+            element.scrollIntoView({ behavior: 'smooth' });
+          }, 100);
+        }
+      }
+    });
+  </script>
+</body>
+</html>
